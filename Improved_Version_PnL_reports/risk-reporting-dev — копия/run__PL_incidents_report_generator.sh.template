@@ -1,0 +1,28 @@
+#!/bin/bash
+
+. venv/bin/activate
+
+declare -a PAIRS=(
+  "CCARUSDT"
+)
+
+for PAIR in "${PAIRS[@]}"
+do
+  START_TIME_SEC=$(date +%s)
+  echo "$PAIR: $(date)"
+  python pnl_incidents/PL_incidents_report_generator.py \
+    -user_postgres 'market_aggregator_syncer' \
+    -pass_postgres '' \
+    -user_click 'default' \
+    -pass_click '' \
+    -from 2022-02-04 18:50:00 \
+    -to 2022-02-06 18:50:00 \
+    -pairs "$PAIR"
+  END_TIME_SEC=$(date +%s)
+  TIME_TAKEN_SEC=$((END_TIME_SEC-START_TIME_SEC))
+  echo "$PAIR: time taken (seconds): $TIME_TAKEN_SEC"
+  echo "$PAIR: $(date)"
+  notify-send "$PAIR done in $TIME_TAKEN_SEC seconds"
+done
+
+notify-send "all done"

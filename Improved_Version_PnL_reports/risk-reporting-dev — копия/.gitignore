@@ -1,0 +1,17 @@
+.DS_Store
+prices_daily.csv
+prices_weekly.csv
+prices_monthly.csv
+MM_report_new.ipynb
+credentials.py
+Untitled.ipynb
+.ipynb_checkpoints
+/.idea
+/venv
+
+# python
+__pycache__
+
+/run__PL_incidents_report_generator.sh
+/reports/*
+!/reports/.gitkeep
